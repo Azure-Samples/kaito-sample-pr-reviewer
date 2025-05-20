@@ -1,12 +1,16 @@
 # kaito-sample-pr-reviewer
 This repository is used to build and iterate on an Automated Pull Request (PR) Reviewer powered by Kubernetes AI Toolchain Operator (KAITO)! The KAITO-powered PR reviwer helps streamline code reviews by analyzing pull requests and leaving intelligent feedback automatically. As this repository is augmented with merged (and approved) code changes, the PR reviewer can be continuously tuned to provide better feedback on each newly submitted pull request.
 
-✨ What can a KAITO-powered PR reviewer do?
+**✨ What can a KAITO-powered PR reviewer do?**
 
 🔍 Analyze PR content (title, description, code diffs)
+
 💬 Comment on potential issues, improvements, security concerns, or missing context
+
 🧠 Leverage KAITO  to review code quality, documentation, and style
+
 🔄 Integrates with GitHub via Webhooks or GitHub Apps
+
 📦 Easy to deploy to any cloud or local environment
 
 ## Getting Started
