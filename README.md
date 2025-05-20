@@ -66,12 +66,12 @@ The output should look like this:
 > You can find more details about the pr-agent in pr-agent repo [here](https://github.com/qodo-ai/pr-agent).
 
 ```sh
-kubectl apply -f pr-agent
+kubectl apply -f pr-agent --recursive
 ```
 
-Under the hood, it will deploy a deployment with configuration specified in the `pr-agent/gateway/httproute.yaml` file and a gateway to expose the pr-agent service to public internet.
+Under the hood, it will deploy a deployment with configuration specified in the `pr-agent/configuration.yaml` file and a gateway to expose the pr-agent service to public internet.
 
-> You may need to configure the network and grant permission before deploying the gateway, please refer to the [Azure Application Gateway for Containers documentation](https://learn.microsoft.com/en-us/azure/application-gateway/for-containers) for more details.
+> You may need to deploy ALB Controller and configure the network and grant necessary permission before deploying the gateway, please refer to the [Azure Application Gateway for Containers documentation](https://learn.microsoft.com/en-us/azure/application-gateway/for-containers) for more details.
 
 The pr-agent will listen to the events from the GitHub webhook and respond to the events, such as `pull_request`, `push`, and `issue_comment`. It only allows the events from [kaito-sample-repo](https://github.com/Azure-Samples/kaito-sample-repo) repository. During handling the events, it will call the inference service we deployed by kaito in the same cluster to get the response and post the response to the GitHub issue or pull request.
 
@@ -102,7 +102,7 @@ After the job is completed, kaito will pack the adapter and configuration files 
 
 ### Deploy inference-with-adapter workspace
 
-Once you have the adapter image, you can deploy the inference-with-adapter workspace to the cluster. The inference-with-adapter workspace will use the adapter image to load the adapter to the model.
+Once you have the adapter image, you can deploy the inference-with-adapter workspace to the cluster. The inference-with-adapter workspace will use the adapter image to load the adapter to the base model.
 
 ```sh
 kubectl apply -f workspace/inference/inference-with-adapter.yaml
@@ -127,4 +127,4 @@ workspace-qwen-2-5-coder-32b-instruct-66dfdbdc78-vpzkb            1/1     Runnin
 workspace-qwen-2-5-coder-32b-instruct-with-adapter-65bc558bxbzh   1/1     Running     0          18h
 ```
 
-You can now use your own test tool to compare the two workspaces to see if the workspace with adapter is better than the original one. 
+You can now use your own test tool to compare the two inference services to see if the workspace with adapter is better than the original one. 
